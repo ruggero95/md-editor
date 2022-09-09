@@ -6,7 +6,7 @@ import Layout from './screen/layout';
 import { Routes, Route, Outlet, Navigate,Navigator, NavigateProps } from '@solidjs/router';
 import { routes } from './app/const/routes';
 import { Home } from './screen/home/home';
-import { Edit } from './screen/edit/edit';
+import { Edit } from './screen/edit/Edit';
   /*const App: Component = () => {
   return (
     <div class={styles.App}>

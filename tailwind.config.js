@@ -5,10 +5,15 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily:{
-        'sans':['DM Sans, sans-serif']
+      fontFamily: {
+        'sans': ['DM Sans, sans-serif']
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
+  variants: {
+    scrollbar: ['rounded']
+  }
 }

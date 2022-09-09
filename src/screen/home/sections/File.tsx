@@ -1,4 +1,4 @@
-import { ButtonIcon } from "../../../components/ButtonIcon"
+import { ButtonIcon, ButtonIconDimension } from "../../../components/ButtonIcon"
 import { SectionTitle } from "../../../components/SectionTitle"
 
 export const File = () => {
@@ -35,8 +35,8 @@ export const File = () => {
                                 04-03-2022
                             </td>
                             <td class="py-4 px-6">
-                                <ButtonIcon hoverColor="#000000" hoverBgColor="#ffffff" iconName="edit" color="bg-black" iconColor="text-white" />
-                                <ButtonIcon hoverColor="#dc2626" hoverBgColor="#fff"  iconName="bin" color="bg-red-600" iconColor="text-white" />
+                                <ButtonIcon dimension={ButtonIconDimension.BIG} hoverColor="#000000" hoverBgColor="#ffffff" iconName="edit" color="bg-black" iconColor="text-white" />
+                                <ButtonIcon dimension={ButtonIconDimension.BIG} hoverColor="#dc2626" hoverBgColor="#fff"  iconName="bin" color="bg-red-600" iconColor="text-white" />
                             </td>
                         </tr>                                           
                     </tbody>
