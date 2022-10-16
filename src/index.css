@@ -43,3 +43,19 @@ code {
 .editor-height{
   height:calc(100vh - (2.5rem + 65px + 0.75rem));
 }
+
+.editor-textarea{
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+}

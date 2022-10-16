@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-
+import { onMount } from 'solid-js';
 import logo from './logo.svg';
 import styles from './App.module.css';
 import Layout from './screen/layout';
@@ -7,6 +7,7 @@ import { Routes, Route, Outlet, Navigate,Navigator, NavigateProps } from '@solid
 import { routes } from './app/const/routes';
 import { Home } from './screen/home/home';
 import { Edit } from './screen/edit/Edit';
+import { DB } from './app/db/db';
   /*const App: Component = () => {
   return (
     <div class={styles.App}>
@@ -34,6 +35,14 @@ const App: Component = () => {
   function DefaultLayout(){
     return (<Layout><Outlet/></Layout>)
   }
+
+  onMount(async () => {
+    console.log('filename')
+    DB.checkAndMigrate()
+    console.log('filename end')
+  });
+  
+
 
   //function getPath({navigate, location}: ({navigate:Navigator, location:Location})){
   function getPath({navigate, location}:{navigate:Navigator, location:Location}){
