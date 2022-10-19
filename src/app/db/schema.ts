@@ -18,7 +18,7 @@ export const fileschema = {
         },
         name:{
             type:'string',
-            maxLegth:500
+            maxLength:500
         },
         creation:{
             type:'string',
