@@ -3,7 +3,7 @@ export enum ButtonIconDimension{
     SMALL='small',
     BIG='big'
 }
-export const ButtonIcon:Component<{dimension:ButtonIconDimension, hoverColor:string, hoverBgColor:string,iconName:string,color:string,iconColor:string}> = (props)=>{
+export const ButtonIcon:Component<{onClickFn?: CallableFunction,dimension:ButtonIconDimension, hoverColor:string, hoverBgColor:string,iconName:string,color:string,iconColor:string}> = (props)=>{
    
 
     function getIcon(dim:ButtonIconDimension, iconName:string){
@@ -29,7 +29,7 @@ export const ButtonIcon:Component<{dimension:ButtonIconDimension, hoverColor:str
         return ''
     }
     return (
-        <button style={{"--ib-bg-hover":props.hoverBgColor,"--ib-text-hover":props.hoverColor}} class={"m-1 icon-button "+props.color+" "+props.iconColor+" "+getClass(props.dimension)}>
+        <button onClick={(e)=>props.onClickFn && props.onClickFn(e)} style={{"--ib-bg-hover":props.hoverBgColor,"--ib-text-hover":props.hoverColor}} class={"m-1 icon-button "+props.color+" "+props.iconColor+" "+getClass(props.dimension)}>
             {getIcon(props.dimension, props.iconName)}
         </button>
     )
