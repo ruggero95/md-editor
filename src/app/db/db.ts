@@ -1,8 +1,26 @@
 import { createRxDatabase, RxDatabase } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/dexie';
+import {
+     addPouchPlugin
+} from 'rxdb/plugins/pouchdb';
+import { fileschema } from './schema';
+window['global'] = window;
+import { addRxPlugin } from 'rxdb';
+import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
+addRxPlugin(RxDBDevModePlugin);
+import { RxDBQueryBuilderPlugin } from 'rxdb/plugins/query-builder';
+addRxPlugin(RxDBQueryBuilderPlugin);
+import { RxDBLeaderElectionPlugin } from 'rxdb/plugins/leader-election';
+addRxPlugin(RxDBLeaderElectionPlugin);
 
+// @ts-ignore: old type
+import * as puchDB from "pouchdb-adapter-idb"
+addPouchPlugin(puchDB);
+import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
+addRxPlugin(RxDBUpdatePlugin);
 interface DBSchema {
     singleton: RxDatabase | null,
+    leader(): Promise<boolean> | undefined
     get(): Promise<RxDatabase>,
     checkAndMigrate(): void
 }
@@ -10,7 +28,8 @@ interface DBSchema {
 export const DB: DBSchema = {
     singleton: null,
     get: async () => {
-        if (DB.singleton != null) {
+        if (DB.singleton != null) {   
+            await DB.leader()     
             return DB.singleton
         }
         const myDatabase = await createRxDatabase({
@@ -18,49 +37,23 @@ export const DB: DBSchema = {
             storage: getRxStorageDexie()
         });
         DB.singleton = myDatabase
+        await DB.leader()     
         return DB.singleton
+    },
+    leader: ()=>{
+        return DB?.singleton?.waitForLeadership()
     },
     checkAndMigrate: async () => {
         const db = await DB.get()
+        await DB.leader()     
         await db.addCollections(
             {
                 files:{
-                    schema:fileSchema
+                    schema:fileschema
                     
                 }
             }
         )
     }
 
-}
-
-
-const fileSchema = {
-    title: 'file_schema',
-    version: 0,
-    primaryKey: 'id',
-    type: 'object',
-    properties: {
-        id: {
-            type: 'string',
-            maxLength: 100 // <- the primary key must have set maxLength
-        },
-        name: {
-            type: 'string'
-        },
-        creation: {
-            type: 'string'
-        },
-        lastedit: {
-            description: 'age in years',
-            type: 'integer',
-
-            // number fields that are used in an index, must have set minium, maximum and multipleOf
-            minimum: 0,
-            maximum: 150,
-            multipleOf: 1
-        }
-    },
-    required: ['name', 'creation', 'lastedit'],
-    indexes: ['name']
 }
