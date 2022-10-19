@@ -1,6 +1,5 @@
 import {createStore} from "solid-js/store"
 export interface FileStored{
-    id:string;
     name:string;
     creation:string;
     lastUpdate:string;
@@ -15,7 +14,6 @@ export const [files, setFiles] = createStore<FileStored[]>([]);
 export const fileStore = {
     createFile:(name:string, creationDate:string, content:string="",editing:boolean = true, opened:boolean =  false, active:boolean = false)=>{
         setFiles([...files, {
-            id:`${name}-${creationDate}`,
             name:name,
             creation:creationDate,
             lastUpdate:'',
@@ -30,12 +28,7 @@ export const fileStore = {
             (file)=>file.creation==creation,
             "name",
             (oldVal)=>name
-        )
-        setFiles(
-            (file)=>file.creation==creation,
-            "id",
-            (oldVal)=>`${name}-${creation}`
-        )
+        )       
     },
     setEditing:(name:string,opened:boolean)=>{
         setFiles(
