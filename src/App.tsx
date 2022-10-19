@@ -1,9 +1,7 @@
 import type { Component } from 'solid-js';
 import { onMount } from 'solid-js';
-import logo from './logo.svg';
-import styles from './App.module.css';
 import Layout from './screen/layout';
-import { Routes, Route, Outlet, Navigate,Navigator, NavigateProps } from '@solidjs/router';
+import { Routes, Route, Outlet, Navigate,Navigator } from '@solidjs/router';
 import { routes } from './app/const/routes';
 import { Home } from './screen/home/home';
 import { Edit } from './screen/edit/Edit';
@@ -38,7 +36,7 @@ const App: Component = () => {
 
   onMount(async () => {
     console.log('filename')
-    DB.checkAndMigrate()
+    //DB.checkAndMigrate()
     console.log('filename end')
   });
   
