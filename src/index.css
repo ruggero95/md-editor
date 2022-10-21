@@ -58,4 +58,6 @@ code {
   background-color: transparent;
   resize: none;
   outline: none;
+  height:calc(100vh - (14rem));
+
 }
