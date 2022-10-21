@@ -15,7 +15,10 @@ RUN npm run build
 FROM nginx:stable-alpine
 
 COPY --from=building /home/app/dist /usr/share/nginx/html
+COPY --from=building /home/app/sites.conf /etc/nginx/conf.d/sites-enabled/sites.conf
+COPY --from=building /home/app/nginx.conf /etc/nginx/nginx.conf
 
+RUN rm /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

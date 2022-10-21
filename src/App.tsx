@@ -46,7 +46,7 @@ const App: Component = () => {
       //retrivedFiles.map((e)=>fileStore.createFile(e.name, e.creation, e.content, e .editing, e.opened, e.active))      
       //setFiles(retrivedFiles)
     })
-    navigate(routes.home, {replace:true})
+    //navigate(routes.home, {replace:true})
   });
 
   onCleanup(() => {
@@ -62,7 +62,10 @@ const App: Component = () => {
   }
   return (
     <>
-      <Routes>        
+      <Routes>
+        <Route path="/">
+          <Navigate href={getPath} />
+        </Route>
         <Route path="/" element={<DefaultLayout />}>
           <Route path={routes.home} element={<Home />}></Route>
           <Route path={routes.edit} element={<Edit />}></Route>
