@@ -4,7 +4,7 @@ import { HomeIcon } from './icons/home';
 import { Logo } from './icons/logo';
 import { For } from 'solid-js';
 import { routes } from '../app/const/routes';
-import { useLocation } from '@solidjs/router';
+import { NavLink, useLocation } from '@solidjs/router';
 
 const menuSidebar: Component = () => {
     const location = useLocation()
@@ -37,9 +37,12 @@ const menuSidebar: Component = () => {
                     {
                         (menu, i) =>
                             <li class="relative content-center">
-                                <a classList={{ "bg-gray-100": isActive(location.pathname, menu.route) }} class="flex items-center text-sm py-3 px-3 m-5  overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" href={menu.route} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-                                    {menu.icon}
-                                </a>
+                                <NavLink href={menu.route}>
+                                    <span classList={{ "bg-gray-100": isActive(location.pathname, menu.route) }} class="flex items-center text-sm py-3 px-3 m-5  overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+                                        {menu.icon}
+
+                                    </span>
+                                </NavLink>                                
                             </li>
                     }
 

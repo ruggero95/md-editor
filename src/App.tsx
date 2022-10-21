@@ -1,10 +1,10 @@
 import { Component, onCleanup } from 'solid-js';
 import { onMount } from 'solid-js';
 import Layout from './screen/layout';
-import { Routes, Route, Outlet, Navigate, Navigator } from '@solidjs/router';
+import { Routes, Route, Outlet, Navigate, Navigator, useNavigate } from '@solidjs/router';
 import { routes } from './app/const/routes';
 import { Home } from './screen/home/home';
-import { Edit } from './screen/edit/Edit';
+import { Edit } from './screen/edit/edit';
 import { DB } from './app/db/db';
 import { filesRepository } from './app/files/files.repository';
 import { files, fileStore, FileStored, setFiles } from './app/files/files.store';
@@ -33,6 +33,7 @@ return (
 
 
 const App: Component = () => {
+  const navigate = useNavigate()
   function DefaultLayout() {
     return (<Layout><Outlet /></Layout>)
   }
@@ -45,6 +46,7 @@ const App: Component = () => {
       //retrivedFiles.map((e)=>fileStore.createFile(e.name, e.creation, e.content, e .editing, e.opened, e.active))      
       //setFiles(retrivedFiles)
     })
+    //navigate(routes.home, {replace:true})
   });
 
   onCleanup(() => {
@@ -55,6 +57,7 @@ const App: Component = () => {
   })
   //function getPath({navigate, location}: ({navigate:Navigator, location:Location})){
   function getPath({ navigate, location }: { navigate: Navigator, location: Location }) {
+    console.log(location.pathname)
     return location.pathname == "/" || location.pathname == "" ? routes.home : location.pathname
   }
   return (
