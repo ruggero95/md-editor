@@ -1,6 +1,6 @@
 import { files, FileStored } from "../../../app/files/files.store"
 import { FileEditorPills } from "../../../components/FileEditorPills"
-import { EditorContainer } from "./editorContainer"
+import { EditorContainer } from "./EditorContainer"
 import { For } from "solid-js"
 export const FileMainRightSide = () => {
     function getFiles() {
